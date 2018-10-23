@@ -1,0 +1,69 @@
+
+name:                typesys
+
+version:             0.0.0.0
+
+synopsis:            A bad theorem prover based on classical logic
+
+homepage:            no
+
+license:             AGPL-3
+
+license-file:        LICENSE
+
+author:              Gregory Nisbet
+
+maintainer:          no
+
+category:            Math
+
+build-type:          Simple
+
+extra-source-files:  ChangeLog.md
+
+cabal-version:       >=1.10
+
+
+-- TODO: I'm putting all the dependencies (even ones only needed by the
+-- test suite) under the main build-depends so that
+-- cabal install --dependencies only will do the right thing.
+
+library
+  exposed-modules:     Typesys
+
+  build-depends:       base >=4.11 && <4.12 ,
+                       positive >= 0.4 ,
+                       HUnit ,
+                       QuickCheck ,
+                       tasty ,
+                       tasty-hunit ,
+                       hindent ,
+                       generic-random
+
+  hs-source-dirs:      src
+
+  default-language:    Haskell2010
+
+
+test-suite AA_test-typesys
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test/unit
+  main-is:             Tests.hs
+  build-depends:       base >=4.11 && <4.12 ,
+                       tasty ,
+                       tasty-hunit ,
+                       typesys
+                       
+  default-language:    Haskell2010
+  
+  
+test-suite AB_proptest-typesys
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test/prop
+  main-is:             Spec.hs
+  build-depends:       base >=4.11 && <4.12 ,
+                       QuickCheck ,
+                       typesys
+                       
+  default-language:    Haskell2010
+  
